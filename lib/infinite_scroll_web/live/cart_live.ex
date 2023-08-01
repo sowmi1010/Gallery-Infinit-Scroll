@@ -1,6 +1,8 @@
 defmodule InfiniteScrollWeb.CartLive do
   use InfiniteScrollWeb, :live_view
 
+  on_mount {InfiniteScrollWeb.UserAuth, :ensure_authenticated}
+
   @images [
     "/images/shoes/shoes1.jpg",
     "/images/shoes/shoes2.jpg",
@@ -10,12 +12,12 @@ defmodule InfiniteScrollWeb.CartLive do
   ]
 
   @bag_images [
-     "/images/Bags/bag1.jpg",
-     "/images/Bags/bag2.jpg",
-     "/images/Bags/bag3.jpg",
-     "/images/Bags/bag4.jpg",
-     "/images/Bags/bag5.jpg",
-     "/images/Bags/bag6.jpg",
+    "/images/Bags/bag1.jpg",
+    "/images/Bags/bag2.jpg",
+    "/images/Bags/bag3.jpg",
+    "/images/Bags/bag4.jpg",
+    "/images/Bags/bag5.jpg",
+    "/images/Bags/bag6.jpg"
   ]
 
   @all_images [
@@ -29,13 +31,12 @@ defmodule InfiniteScrollWeb.CartLive do
     "/images/Bags/bag4.jpg",
     "/images/shoes/shoes5.jpg",
     "/images/Bags/bag5.jpg",
-    "/images/Bags/bag6.jpg",
+    "/images/Bags/bag6.jpg"
   ]
 
   def handle_params(params, _url, socket) do
     {:noreply, assign(socket, images: @images, bag_images: @bag_images, all_images: @all_images)}
   end
-
 
   def render(assigns) do
     ~H"""
@@ -71,25 +72,37 @@ defmodule InfiniteScrollWeb.CartLive do
       </ul>
       <div id="content" class="flex gap-4 justify-center items-center">
         <div id="content_tab_1" class="tab_content">
-        <div class="grid grid-cols-3 gap-4">
-        <div :for={image <- @all_images}>
-          <img id={"image-#{random_id()}"} src={image} class="lg:h-72 lg:w-72 h-48 w-48 rounded-lg" />
-        </div>
-       </div>
+          <div class="grid grid-cols-3 gap-4">
+            <div :for={image <- @all_images}>
+              <img
+                id={"image-#{random_id()}"}
+                src={image}
+                class="lg:h-72 lg:w-72 h-48 w-48 rounded-lg"
+              />
+            </div>
+          </div>
         </div>
         <div id="content_tab_2" class="tab_content hidden">
-         <div class="grid grid-cols-3 gap-4">
-          <div :for={image <- @images}>
-            <img id={"image-#{random_id()}"} src={image} class="lg:h-72 lg:w-72 h-48 w-48 rounded-lg" />
+          <div class="grid grid-cols-3 gap-4">
+            <div :for={image <- @images}>
+              <img
+                id={"image-#{random_id()}"}
+                src={image}
+                class="lg:h-72 lg:w-72 h-48 w-48 rounded-lg"
+              />
+            </div>
           </div>
-         </div>
         </div>
         <div id="content_tab_3" class="tab_content hidden">
-         <div class="grid grid-cols-3 gap-4">
-          <div :for={image <- @bag_images}>
-           <img id={"image-#{random_id()}"} src={image} class="lg:h-72 lg:w-72 h-48 w-48 rounded-lg" />
+          <div class="grid grid-cols-3 gap-4">
+            <div :for={image <- @bag_images}>
+              <img
+                id={"image-#{random_id()}"}
+                src={image}
+                class="lg:h-72 lg:w-72 h-48 w-48 rounded-lg"
+              />
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
