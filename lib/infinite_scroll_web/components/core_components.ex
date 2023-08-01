@@ -224,6 +224,33 @@ defmodule InfiniteScrollWeb.CoreComponents do
     """
   end
 
+  def nav_bar(assigns) do
+    ~H"""
+    <div class="flex flex-wrap items-center justify-center py-4 text-center text-base font-bold text-gray-700 md:py-8">
+      <button id="tab1" phx-click={set_active_tab("#tab1") |> show_active_content("#content_tab_1")}
+      class="mb-3 mr-3 px-5 py-2.5 hover:border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full active-tab">All categories</button>
+      <button id="tab2" phx-click={set_active_tab("#tab2") |> show_active_content("#content_tab_2")}
+      class="mb-3 mr-3 px-5 py-2.5 hover:border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full">Shoes</button>
+      <button id="tab3" phx-click={set_active_tab("#tab3") |> show_active_content("#content_tab_3")}
+      class="mb-3 mr-3 px-5 py-2.5 hover:border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full">Bags</button>
+    </div>
+    """
+  end
+
+  defp show_active_content(js \\ %JS{}, to) do
+    js
+    |> JS.hide(to: "div.tab_content")
+    |> JS.show(to: to)
+  end
+
+  defp set_active_tab(js \\ %JS{}, tab) do
+    js
+    |> JS.remove_class("active-tab", to: "a.active-tab")
+    |> JS.add_class("active-tab", to: tab)
+  end
+
+
+
   @doc """
   Renders an input with label and error messages.
 
@@ -233,7 +260,29 @@ defmodule InfiniteScrollWeb.CoreComponents do
 
   ## Examples
 
-      <.input field={@form[:email]} type="email" />
+      <.input f<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+  <div>
+    <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="" />
+  </div>
+  <div>
+    <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="" />
+  </div>
+  <div>
+    <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="" />
+  </div>
+  <div>
+    <im….com/docs/gallery/square/image-8.jpg" alt="" />
+  </div>
+  <div>
+    <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg" alt="" />
+  </div>
+  <div>
+    <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg" alt="" />
+  </div>
+  <div>
+    <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg" alt="" />
+  </div>
+  </div>ield={@form[:email]} type="email" />
       <.input name="my-input" errors={["oh no!"]} />
   """
   attr :id, :any, default: nil

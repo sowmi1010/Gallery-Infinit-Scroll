@@ -20,6 +20,7 @@ defmodule InfiniteScrollWeb.Router do
     get "/", PageController, :home
 
     live "/gallery", HomeLive.Index, :index
+    live "/photos", CartLive
   end
 
   # Other scopes may use custom stacks.
