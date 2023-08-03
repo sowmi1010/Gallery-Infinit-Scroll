@@ -27,7 +27,6 @@ defmodule InfiniteScrollWeb.Router do
 
     get "/", PageController, :home
     live "/gallery", HomeLive.Index, :index
-
   end
 
   # Other scopes may use custom stacks.
@@ -66,6 +65,8 @@ defmodule InfiniteScrollWeb.Router do
     end
 
     post "/users/log_in", UserSessionController, :create
+
+    get "/users/log_in/:token", UserSessionController, :create
   end
 
   scope "/", InfiniteScrollWeb do

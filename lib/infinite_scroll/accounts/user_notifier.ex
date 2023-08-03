@@ -76,4 +76,19 @@ defmodule InfiniteScroll.Accounts.UserNotifier do
     ==============================
     """)
   end
+
+  def deliver_magic_link(user, url) do
+    deliver(user.email, "Sign in to MagicLink", """
+    ==============================
+    Hi #{user.email},
+
+    Please use this link to sign in:
+
+    #{url}
+
+    If you didn't request this email, feel free to ignore this.
+    ==============================
+    """)
+  end
+
 end

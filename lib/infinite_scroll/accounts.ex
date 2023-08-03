@@ -307,6 +307,14 @@ defmodule InfiniteScroll.Accounts do
     UserNotifier.deliver_reset_password_instructions(user, reset_password_url_fun.(encoded_token))
   end
 
+  def deliver_magic_link(user, magic_link_url_fun) do
+    {email_token, token} = UserToken.build_email_token(user, "magic_link")
+    Repo.insert!(token)
+
+    UserNotifier.deliver_magic_link(user, magic_link_url_fun.(email_token))
+  end
+
+
   @doc """
   Gets the user by reset password token.
 
@@ -321,6 +329,15 @@ defmodule InfiniteScroll.Accounts do
   """
   def get_user_by_reset_password_token(token) do
     with {:ok, query} <- UserToken.verify_email_token_query(token, "reset_password"),
+         %User{} = user <- Repo.one(query) do
+      user
+    else
+      _ -> nil
+    end
+  end
+
+  def get_user_by_email_token(token, context) do
+    with {:ok, query} <- UserToken.verify_email_token_query(token, context),
          %User{} = user <- Repo.one(query) do
       user
     else

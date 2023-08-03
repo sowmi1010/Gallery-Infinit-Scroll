@@ -31,6 +31,25 @@ defmodule InfiniteScrollWeb.UserLoginLive do
           </.button>
         </:actions>
       </.simple_form>
+
+      <div class="flex justify-center mt-14">
+        <div class="align-center font-bold text-xl">OR</div>
+      </div>
+
+      <.simple_form
+        for={@form}
+        id="magic_link_form"
+        action={~p"/users/log_in?_action=magic_link"}
+        phx-update="ignore"
+        class="my-0 py-0"
+      >
+        <.input field={@form[:email]} type="email" label="Email" required />
+        <:actions>
+          <.button class="w-full">
+            Send me a link <.icon name="hero-envelope" />
+          </.button>
+        </:actions>
+      </.simple_form>
     </div>
     """
   end
